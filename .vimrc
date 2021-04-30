@@ -7,7 +7,13 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'edkolev/tmuxline.vim'
 call plug#end()
+
+colorscheme bubblegum-256-dark
+set cursorline
+set cursorcolumn
 
 runtime macros/matchit.vim
 
@@ -26,8 +32,13 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
+let g:syntastic_ruby_checker = ['rubocop']
+let g:prettier#autoformat_config_present = 1
+let g:prettier#autoformat_require_pragma = 0
 
 function! WrapForTmux(s)
   if !exists('$TMUX')
@@ -92,11 +103,6 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
-" COMMENCE CUSTOMIZATION
-
-set statusline+=%F
-
-
 " Pane minimizing
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
@@ -122,10 +128,6 @@ nnoremap <leader>w <C-w>v<C-w>l
 autocmd BufWritePre * :%s/\s\+$//e
 
 packloadall
-let g:prettier#autoformat_config_present = 1
-let g:prettier#autoformat_config_present = 1
-let g:prettier#autoformat_require_pragma = 0
-
 set rtp+=/usr/local/opt/fzf
 " If installed using git
 set rtp+=~/.fzf
