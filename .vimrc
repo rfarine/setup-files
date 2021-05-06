@@ -9,6 +9,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'edkolev/tmuxline.vim'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 colorscheme bubblegum-256-dark
@@ -69,6 +70,7 @@ set autoread                                                 " reload files when
 set backspace=2                                              " Fix broken backspace in some setups
 set backupcopy=yes                                           " see :help crontab
 
+set noswapfile
 set expandtab                                                " expand tabs to spaces
 set ignorecase                                               " case-insensitive search
 set incsearch                                                " search as you type
@@ -93,7 +95,9 @@ set hidden
 set hls
 set nu
 set listchars=tab:▸\ ,eol:¬
-set textwidth=120
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
 nnoremap / /\v
 vnoremap / /\v
 set smartcase
@@ -133,7 +137,12 @@ set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
 
 " Remap fzf
-nnoremap <silent> <C-p> :FZF ~/Documents/Work/clockwork_web<CR>
+nnoremap <silent> <C-p> :FZF<CR>
+" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+"   'previous-history' instead of 'down' and 'up'.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Javascript
 let g:javascript_conceal_arrow_function = "⇒"
