@@ -1,5 +1,4 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 call plug#begin()
 Plug 'vim-syntastic/syntastic'
@@ -10,9 +9,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'eugen0329/vim-esearch'
+Plug 'ruby-formatter/rufo-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'jparise/vim-graphql'
 call plug#end()
 
-colorscheme bubblegum-256-dark
 set cursorline
 set cursorcolumn
 
@@ -22,6 +26,13 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+
+" note that if you are using Plug mapping you should not use `noremap` mappings.
+nmap <F5> <Plug>(lcn-menu)
+" " Or map each action separately
+nmap <silent>K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> <F2> <Plug>(lcn-rename)
 
 filetype plugin indent on    " required
 
@@ -36,7 +47,7 @@ let g:syntastic_check_on_wq = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
+let g:airline_theme='dracula'
 let g:syntastic_ruby_checker = ['rubocop']
 let g:prettier#autoformat_config_present = 1
 let g:prettier#autoformat_require_pragma = 0
@@ -65,6 +76,7 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 syntax enable
 
+au FocusGained,BufEnter * :checktime
 set autochdir
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
@@ -96,8 +108,6 @@ set hls
 set nu
 set listchars=tab:▸\ ,eol:¬
 " Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
 nnoremap / /\v
 vnoremap / /\v
 set smartcase
@@ -136,8 +146,6 @@ set rtp+=/usr/local/opt/fzf
 " If installed using git
 set rtp+=~/.fzf
 
-" Remap fzf
-nnoremap <silent> <C-p> :FZF<CR>
 " Enable per-command history
 " - History files will be stored in the specified directory
 " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
@@ -147,16 +155,27 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " Javascript
 let g:javascript_conceal_arrow_function = "⇒"
 
+" Remap fzf to ctrl-P
+nnoremap <silent> <C-p> :FZF<CR>
 " Enable per-command history
 " - History files will be stored in the specified directory
 " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-" See `man fzf-tmux` for available options
-if exists('$TMUX')
-  let g:fzf_layout = { 'tmux': '-d30%' }
-else
-  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-endif
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
+" Vim E-Search
+let g:esearch = {}
+" Start the search only when the enter is hit instead of updating the pattern
+" while you're typing.
+let g:esearch.live_update = 0
+
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \'ruby': ['sorbet']
+      \}
+
+let g:ale_linters = {
+      \   'ruby': ['sorbet'],
+      \}
