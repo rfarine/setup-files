@@ -10,6 +10,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'junegunn/fzf'
 call plug#end()
 
 set cursorline
@@ -96,7 +97,6 @@ set nu
 set listchars=tab:▸\ ,eol:¬
 " Make it obvious where 80 characters is
 set textwidth=80
-set colorcolumn=+1
 nnoremap / /\v
 vnoremap / /\v
 set smartcase
@@ -131,31 +131,17 @@ nnoremap <leader>w <C-w>v<C-w>l
 autocmd BufWritePre * :%s/\s\+$//e
 
 packloadall
-set rtp+=/usr/local/opt/fzf
-" If installed using git
-set rtp+=~/.fzf
 
 " Remap fzf
 nnoremap <silent> <C-p> :FZF<CR>
+
 " Enable per-command history
 " - History files will be stored in the specified directory
 " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " Javascript
 let g:javascript_conceal_arrow_function = "⇒"
-
-" Enable per-command history
-" - History files will be stored in the specified directory
-" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
-"   'previous-history' instead of 'down' and 'up'.
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-" See `man fzf-tmux` for available options
-if exists('$TMUX')
-  let g:fzf_layout = { 'tmux': '-d30%' }
-else
-  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-endif
 
