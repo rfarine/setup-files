@@ -5,13 +5,17 @@ call plug#begin()
 Plug 'vim-syntastic/syntastic'
 Plug 'thoughtbot/vim-rspec'
 Plug 'w0rp/ale'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'edkolev/tmuxline.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'junegunn/fzf'
+Plug 'ervandew/supertab'
+Plug 'catppuccin/vim', { 'as': 'catppuccin_frappe' }
+Plug 'edkolev/tmuxline.vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
+
+let g:lightline = {'colorscheme': 'catppuccin_frappe'}
+set noshowmode
 
 set cursorline
 set cursorcolumn
@@ -36,7 +40,6 @@ let g:syntastic_check_on_wq = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
 let g:syntastic_ruby_checker = ['rubocop']
 let g:prettier#autoformat_config_present = 1
 let g:prettier#autoformat_require_pragma = 0
@@ -144,4 +147,3 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " Javascript
 let g:javascript_conceal_arrow_function = "⇒"
-
