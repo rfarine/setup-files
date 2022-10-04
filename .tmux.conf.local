@@ -340,7 +340,7 @@ tmux_conf_copy_to_os_clipboard=false
 #set -g history-limit 10000
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
@@ -404,6 +404,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 set -g @plugin 'dracula/tmux'
 set -g @dracula-show-powerline true
 set -g @dracula-border-contrast true
+set -g @plugin 'sainnhe/tmux-fzf'
 
 
 # -- custom variables ----------------------------------------------------------
