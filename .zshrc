@@ -59,3 +59,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 source $HOMEBREW_PREFIX/opt/chruby/share/chruby/chruby.sh
 
 source $HOMEBREW_PREFIX/opt/chruby/share/chruby/auto.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /opt/secrets/current/dev_env_exports.sh
