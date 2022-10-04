@@ -1,26 +1,14 @@
 export ZSH="/Users/raefarine/.oh-my-zsh"
 
-source ~/.zplug/init.zsh
-source ~/src/github.com/justworkshr/dev/dev.sh
-
-zplug "dracula/zsh", as:theme
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
+ZSH_THEME="spaceship"
+SPACESHIP_PACKAGE_SHOW="false"
 
 ENABLE_CORRECTION="true"
 
 plugins=(
   git
   zsh-syntax-highlighting
+  zsh-autocomplete
   zsh-autosuggestions
   rvm
   ruby
@@ -31,16 +19,9 @@ AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=122'
 
 source $ZSH/oh-my-zsh.sh
 
-alias zshconfig="vim ~/.zshrc"
+# alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias root="cd ~"
 alias jw="dev cd clockwork_web"
-alias be="sh ../etc/log_dirs.sh && bundle install && DB=remote bundle exec rails s"
-alias sk="DB=remote RAILS_ENV=development bundle exec sidekiq"
-alias rs="redis-server --daemonize yes"
-alias rt="RUBYOPT='-W0' bundle exec spring rspec"
-alias rc="DB=remote RAILS_ENV=development bundle exec rails c"
-alias db="mysql.server start"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -70,17 +51,11 @@ add-zsh-hook chpwd load-nvmrc
 
 load-nvmrc
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+source /opt/dev/dev.sh
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-source /opt/secrets/current/dev_env_exports.sh
+
+source $HOMEBREW_PREFIX/opt/chruby/share/chruby/chruby.sh
+
+source $HOMEBREW_PREFIX/opt/chruby/share/chruby/auto.sh
