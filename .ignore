@@ -1,0 +1,24 @@
+# Want to ignore:
+Applications/
+Desktop/
+Documents/
+Downloads/
+Library/
+Movies/
+Music/
+Pictures/
+Public/
+.ssh/
+.rvm/
+.rubies/
+.nvm/
+.local/
+.gem/
+.config/
+.cache/
+.bundle/
+.Trash/
+
+# Want to be searched:
+!.oh-my-zsh/
+!src/github.io/justworkshr/
